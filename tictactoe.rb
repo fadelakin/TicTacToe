@@ -156,3 +156,55 @@ class TicTacToe
 	    wrong_input unless input == 'exit'
 	  end
 	end
+
+	def wrong_input
+	  put_line
+	  puts "Please specify a move with the format 'A1' , 'B3' , 'C2' etc."
+	  user_turn
+	end
+
+	def wrong_move
+	  put_line
+	  puts "You must choose an empty slot"
+	  user_turn
+	end
+
+	def check_game(next_turn)
+  		game_over = nil
+		@columns.each do |column|
+	    	# see if cpu has won
+			if times_in_column(column, @cpu) == 3
+	    		put_line
+	    		puts "Game Over -- #{@cpu_name} WINS!!!"
+	    		game_over = true
+	    	end
+	    	# see if user has won
+	    	if times_in_column(column, @user) == 3
+	    		put_line
+	      		puts "Game Over -- #{@user_name} WINS!!!"
+	      		game_over = true
+	    	end
+	   	end
+	  	unless game_over
+	    	if(moves_left > 0)
+	      		if(next_turn == @user)
+	        		user_turn
+	      		else
+	        		cpu_turn
+	      		end
+	    	else
+	      		put_line
+	      		puts "Game Over -- DRAW!"
+	    	end
+	  	end
+	end
+
+	def moves_left
+		slots = 0
+		@places.each do |k, v|
+			slots += 1 if v == " "
+		end
+		slots
+	end
+
+end
