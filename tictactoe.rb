@@ -51,3 +51,26 @@ class TicTacToe
 		puts "#############################################################################"
   		puts "#############################################################################"
   	end
+
+  	def draw_game
+  		puts ""
+  		puts "#{@cpu_name}: #{@cpu}"
+  		puts "#{@user_name}: #{@user}"
+  		puts ""
+  		puts "		a b c"
+  		puts ""
+  		puts " 1 #{@places["a1"]}|#{@places["b1"]}|#{@places["c1"]}"
+  		puts "   -----"
+  		puts " 2 #{@places["a2"]}|#{@places["b2"]}|#{@places["c2"]}"
+  		puts "   -----"
+  		puts " 3 #{@places["a3"]}|#{@places["b3"]}|#{@places["c3"]}"
+  	end
+
+  	def cpu_turn
+  		move = cpu_find_move
+  		@places[move] = @cpu
+  		put_line
+  		puts "#{@cpu_name} marks #{move.upcase}"
+  		check_game(@user)
+  	end
+  	
