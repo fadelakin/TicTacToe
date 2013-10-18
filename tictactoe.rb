@@ -95,3 +95,64 @@ class TicTacToe
   			end
   		end
   	end
+
+	def cpu_find_move
+	  @columns.each do |column|
+	  	if times_in_column(column, @cpu) == 2
+	  		return empty_in_column column
+	  	end
+	  end
+
+	  	@columns.each do |column|
+	  		if times_in_column(column, @user) == 2
+	  			return empty_in_column column
+	  		end
+	  	end
+
+	  	@columns.each do |column|
+	  		if times_in_column(column, @cpu) == 1
+	  			return empty_in_column column
+	  		end
+	  	end
+
+	  	#find a random empty spot
+	  	k = @places.keys;
+	  	i = rand(k.length)
+	  	if @places[k[i]] == " "
+	  		return k[i]
+	  	else
+	  		#just find the first empty slot
+	  		@places.each { |k,v| return k if v == " " }
+	  	end
+	end
+
+	def user_turn
+	  put_line
+	  puts " RUBY TIC TAC TOE"
+	  draw_game
+	  puts " #{@user_name}, please make a move or type 'exit' to quit"
+	  STDOUT.flush
+	  input = gets.chomp.downcase
+	  put_bar
+	  if input.length == 2
+	    a = input.split("")
+	    if(['a','b','c'].include? a[0])
+	      if(['1','2','3'].include? a[1])
+	        if @places[input] == " "
+	          @places[input] = @user
+	          put_line
+	          puts "#{@user_name} marks #{input.upcase}"
+	          check_game(@cpu)
+	        else
+	          wrong_move
+	        end
+	      else
+	        wrong_input
+	      end
+	    else
+	      wrong_input
+	    end
+	  else
+	    wrong_input unless input == 'exit'
+	  end
+	end
