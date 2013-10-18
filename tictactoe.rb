@@ -52,6 +52,7 @@ class TicTacToe
   		puts "#############################################################################"
   	end
 
+  	# Draw the tic tac toe board
   	def draw_game
   		puts ""
   		puts "#{@cpu_name}: #{@cpu}"
@@ -73,4 +74,24 @@ class TicTacToe
   		puts "#{@cpu_name} marks #{move.upcase}"
   		check_game(@user)
   	end
-  	
+
+  	def times_in_column arr, item
+  		times = 0
+  		arr.each do |i|
+  			times += 1 if @places[i] == item
+  			unless @places[i] == item || @places[i] == " "
+  				# opposite piece is in column so column can't be used to win.
+  				# so the thing to do is choose a different column so return 0
+  				return 0
+  			end
+  		end
+  		times
+  	end
+
+  	def empty_in_column arr
+  		arr.each do |i|
+  			if @places[i] == " "
+  				return i
+  			end
+  		end
+  	end
