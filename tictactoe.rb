@@ -1,5 +1,8 @@
 # Tic Tac Toe
 # Temidayo Fisher Adelakin
+
+#!/usr/bin/env ruby
+
 class TicTacToe
 
 	def initialize
@@ -206,5 +209,7 @@ class TicTacToe
 		end
 		slots
 	end
-
 end
+
+tictac = TicTacToe.new
+tictac.initialize
